@@ -10,6 +10,7 @@ var dishRouter = require('./routes/dishRouter');
 var promoRouter = require('./routes/promoRouter');
 var leaderRouter = require('./routes/leaderRouter');
 const uploadRouter = require('./routes/uploadRouter');
+var favoriteRouter = require('./routes/favoriteRouter');
 
 var session = require('express-session');
 var FileStore = require('session-file-store')(session);
@@ -92,6 +93,7 @@ app.use('/users', usersRouter);
 app.use('/dishes',dishRouter);
 app.use('/promotions',promoRouter);
 app.use('/leaders',leaderRouter);
+app.use('/favorites',favoriteRouter);
 
 
 // catch 404 and forward to error handler
@@ -100,8 +102,6 @@ app.use(function(req, res, next) {
 });
 
 function auth (req, res, next) {
-  console.log(req.user);
-
   if (!req.user) {
     var err = new Error('You are not authenticated!');
     err.status = 403;
